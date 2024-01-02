@@ -1,0 +1,29 @@
+.price-container {
+}
+
+.was-price {
+  color: #7e8994;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  text-transform: capitalize;
+}
+
+.vat-price {
+  color: #1d2024;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 83.333% */
+  text-transform: capitalize;
+}
+
+.exvat-price {
+  color: #1d2024;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  text-transform: capitalize;
+}

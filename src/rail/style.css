@@ -1,0 +1,30 @@
+.rail-container {
+  padding: 49px 160px;
+  width: 1440px;
+  height: 582px;
+  background: #f0f1f2;
+  position: relative;
+  display: flex;
+  margin: 60px auto;
+  flex-direction: column;
+}
+
+.plus {
+  height: 16px;
+  left: 30%;
+  position: absolute;
+  top: 33%;
+  width: 16px;
+}
+.product {
+  display: flex;
+}
+.main-product {
+  display: flex;
+  flex: 0.3;
+}
+.bundle {
+  display: flex;
+  gap: 30px;
+  flex: 0.7;
+}
