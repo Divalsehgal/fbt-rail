@@ -1,5 +1,8 @@
 import Product from "../components/product/products";
 import product1 from "../assets/product1.jpg";
+import product2 from "../assets/product2.jpg";
+import product3 from "../assets/product3.jpg";
+
 import "./style.css";
 type Props = {};
 
@@ -7,10 +10,34 @@ const ProductOneProps = {
   src: product1,
   description: "This Item: Dobbs Corner Gaming Desk with Adjustable Monitor...",
   price: 91.99,
-  wasPrice:97.99,
+  wasPrice: 97.99,
   priceText: "inc VAT",
   priceCurrency: "£",
   exVatPrice: 76.99,
+  exVatPriceText: "ex VAT",
+  alt: "This Item: Dobbs Corner",
+};
+
+const ProductTwoProps = {
+  src: product2,
+  description: "X Rocker Saturn Mid-Back Gaming Chair",
+  price: 84.99,
+  wasPrice: 97.99,
+  priceText: "inc VAT",
+  priceCurrency: "£",
+  exVatPrice: 70.82,
+  exVatPriceText: "ex VAT",
+  alt: "X Rocker Saturn Mid-Back",
+};
+
+const ProductThreeProps = {
+  src: product3,
+  description: "Mesh Tek Single Cube Bedside Table",
+  price: 74.99,
+  wasPrice: null,
+  priceText: "inc VAT",
+  priceCurrency: "£",
+  exVatPrice: 74.99,
   exVatPriceText: "ex VAT",
   alt: "This Item: Dobbs Corner",
 };
@@ -55,10 +82,10 @@ function Rail({}: Props) {
         </div>
         <div className="bundle">
           {/* Product 2*/}
-          <Product {...ProductOneProps} />
+          <Product {...ProductTwoProps} />
 
           {/* Product 3*/}
-          <Product {...ProductOneProps} />
+          <Product {...ProductThreeProps} />
         </div>
       </div>
 
