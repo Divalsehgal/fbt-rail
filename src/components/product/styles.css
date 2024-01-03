@@ -5,6 +5,7 @@
   height: 225px;
   flex-shrink: 0;
   gap: 8px;
+  position: relative;
 }
 
 .product-container .description {
@@ -33,9 +34,31 @@
   display: flex;
   width: 225px;
   padding: 8px;
+  min-height: 42px;
   justify-content: space-between;
   border-radius: 4px;
   border: 1px solid #1d2024;
   background: #fff;
   align-items: center;
+}
+
+
+.checkbox {
+  width: 19px;
+  height: 19px;
+  position: absolute;
+  left: 196px;
+  top: 12px;
+}
+
+.checkbox-empty {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  border: 1px solid #1D2024;
+  position: absolute;
+  left: 196px;
+  top: 12px;
+  background: #FFF;
 }

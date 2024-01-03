@@ -10,21 +10,34 @@
 }
 
 .plus {
-  height: 16px;
+  height: 32px;
   left: 30%;
   position: absolute;
   top: 33%;
-  width: 16px;
+  width: 32px;
+  margin-left: -15px;
+
 }
+
 .products {
   display: flex;
 }
+
 .main-product {
   display: flex;
-  flex: 0.3;
+  flex: 0.4;
+  max-width: 321px;
 }
+
 .bundle {
   display: flex;
-  gap: 30px;
-  flex: 0.7;
+  gap: 16px;
+  flex: 0.4;
+}
+
+
+.calculation {
+  flex:0.2;
+  margin-top:119px;
+  margin-left: 70px;
 }

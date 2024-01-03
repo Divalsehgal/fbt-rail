@@ -1,48 +1,111 @@
 import Product from "../components/product/products";
 import product1 from "../assets/product1.jpg";
-import product2 from "../assets/product2.jpg";
-import product3 from "../assets/product3.jpg";
+import product2 from "../assets/product2.png";
+import product3 from "../assets/product3.png";
+import blacksvg from "../assets/black.svg";
+import greensvg from "../assets/green.svg";
 
 import "./style.css";
+import Price from "../components/price/price";
+import Button from "../components/button/button";
+import { useEffect, useState } from "react";
 type Props = {};
 
-const ProductOneProps = {
-  src: product1,
-  description: "This Item: Dobbs Corner Gaming Desk with Adjustable Monitor...",
-  price: 91.99,
-  wasPrice: 97.99,
-  priceText: "inc VAT",
-  priceCurrency: "£",
-  exVatPrice: 76.99,
-  exVatPriceText: "ex VAT",
-  alt: "This Item: Dobbs Corner",
-};
-
-const ProductTwoProps = {
-  src: product2,
-  description: "X Rocker Saturn Mid-Back Gaming Chair",
-  price: 84.99,
-  wasPrice: 97.99,
-  priceText: "inc VAT",
-  priceCurrency: "£",
-  exVatPrice: 70.82,
-  exVatPriceText: "ex VAT",
-  alt: "X Rocker Saturn Mid-Back",
-};
-
-const ProductThreeProps = {
-  src: product3,
-  description: "Mesh Tek Single Cube Bedside Table",
-  price: 74.99,
-  wasPrice: null,
-  priceText: "inc VAT",
-  priceCurrency: "£",
-  exVatPrice: 74.99,
-  exVatPriceText: "ex VAT",
-  alt: "This Item: Dobbs Corner",
-};
-
 function Rail({}: Props) {
+  const [productData, setProductData] = useState([
+    {
+      src: product1,
+      description:
+        "This Item: Dobbs Corner Gaming Desk with Adjustable Monitor...",
+      price: 91.99,
+      wasPrice: 97.99,
+      priceText: "inc VAT",
+      priceCurrency: "£",
+      exVatPrice: 76.99,
+      exVatPriceText: "ex VAT",
+      alt: "This Item: Dobbs Corner",
+      variantSelector: null,
+      variants: [],
+      id: 1,
+      isChecked: true,
+      currentVariant: { color: "Black", colorCode: blacksvg },
+    },
+    {
+      src: product2,
+      description: "X Rocker Saturn Mid-Back Gaming Chair",
+      price: 84.99,
+      id: 2,
+      wasPrice: 97.99,
+      priceText: "inc VAT",
+      priceCurrency: "£",
+      exVatPrice: 70.82,
+      exVatPriceText: "ex VAT",
+      alt: "X Rocker Saturn Mid-Back",
+      variantSelector: "Green",
+      variants: [
+        { color: "Green", colorCode: "#108510" },
+        { color: "Red", colorCode: "#D80A00" },
+      ],
+      isChecked: false,
+      currentVariant: { color: "Green", colorCode: greensvg },
+    },
+    {
+      src: product3,
+      description: "Mesh Tek Single Cube Bedside Table",
+      price: 74.99,
+      wasPrice: 74.99,
+      priceText: "inc VAT",
+      id: 3,
+      priceCurrency: "£",
+      exVatPrice: 74.99,
+      exVatPriceText: "ex VAT",
+      alt: "This Item: Dobbs Corner",
+      variantSelector: null,
+      isChecked: false,
+      variants: [],
+      currentVariant: "",
+    },
+  ]);
+
+  const [totalPrice, setTotalPrice] = useState({
+    wasPrice: 0,
+    actualPrice: 0,
+    priceDifference:0
+  });
+
+  const checkboxHandler = (id) => () => {
+    setProductData((prev) => {
+      return prev.map((product) => {
+        if (product.id === id) {
+          return { ...product, isChecked: !product.isChecked };
+        }
+        return product;
+      });
+    });
+  };
+
+  useEffect(() => {
+    const calculateTotal = () => {
+      return productData.reduce(
+        (total, product) => {
+          if (product.isChecked) {
+            total.actualPrice += product.price;
+            if (product.wasPrice !== null) {
+              total.wasPrice += product.wasPrice;
+            }
+          }
+          return total;
+        },
+        { wasPrice: 0, actualPrice: 0 }
+      );
+    };
+
+    const { wasPrice, actualPrice } = calculateTotal();
+    const priceDifference = wasPrice - actualPrice;
+    setTotalPrice({ wasPrice, actualPrice ,priceDifference});
+
+  }, [productData]);
+
   return (
     <div className="rail-container">
       <span>
@@ -56,11 +119,10 @@ function Rail({}: Props) {
         </h4>
       </span>
 
-
       <div className="products">
         {/* Product 1*/}
         <div className="main-product">
-          <Product {...ProductOneProps} />
+          <Product {...productData[0]} checkboxHandler={checkboxHandler} />
 
           <div className="plus">
             <svg
@@ -82,14 +144,22 @@ function Rail({}: Props) {
         </div>
         <div className="bundle">
           {/* Product 2*/}
-          <Product {...ProductTwoProps} />
+          <Product {...productData[1]} checkboxHandler={checkboxHandler} />
 
           {/* Product 3*/}
-          <Product {...ProductThreeProps} />
+          <Product {...productData[2]} checkboxHandler={checkboxHandler} />
+        </div>
+
+        {/* calculation box */}
+
+        <div className="calculation">
+          <div>{2} Items added</div>
+          <div>Total Bundle Price</div>
+          <Price wasPrice={totalPrice.wasPrice.toFixed(2)} price={totalPrice.actualPrice.toFixed(2)} />
+          <div>{totalPrice.priceDifference.toFixed(2)}</div>
+          <Button title="Add both to Basket" />
         </div>
       </div>
-
-
     </div>
   );
 }

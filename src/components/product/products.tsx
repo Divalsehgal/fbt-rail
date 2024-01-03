@@ -1,5 +1,6 @@
 import Price from "../price/price";
 import "./styles.css";
+import checkbox from "../../assets/checkbox.svg";
 type ProductProps = {
   src: string;
   alt: string;
@@ -7,11 +8,36 @@ type ProductProps = {
 };
 
 function Product(props: ProductProps) {
-  const { src, alt, description } = props;
+  const {
+    src,
+    alt,
+    description,
+    isChecked,
+    currentVariant,
+    variants,
+    id,
+    checkboxHandler,
+  } = props;
+  const showVariantColor = currentVariant?.color;
+  const selectedColor = currentVariant?.colorCode;
+
   return (
     <div className="product-container">
       {/* image */}
       <img src={src} alt={alt} />
+      {/* checkbox */}
+
+      {isChecked ? (
+        <img
+          className="checkbox"
+          src={checkbox}
+          alt="checkbox"
+          onClick={checkboxHandler(id)}
+        />
+      ) : (
+        <span className="checkbox-empty" onClick={checkboxHandler(id)}></span>
+      )}
+
       {/* rating */}
       <Rating />
       {/* Description */}
@@ -22,42 +48,83 @@ function Product(props: ProductProps) {
       {/* Variant selector */}
 
       <div className="variant-selector">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignContent: "center",
-            gap: "8px",
-          }}
-        >
-          {" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
+        {isChecked ? (
+          selectedColor ? (
+            <>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center",
+                  gap: "8px",
+                }}
+              >
+                {" "}
+                <img src={selectedColor} alt="color-variant" />
+                <p
+                  style={{
+                    alignSelf: "center",
+                  }}
+                >
+                  {showVariantColor}
+                </p>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M9 18L15 12L9 6"
+                  stroke="#1D2024"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>{" "}
+            </>
+          ) : (
+            <div
+              style={{
+                display: "contents",
+              }}
+            >
+              <span>+</span> <span>1</span>
+              <span>-</span>
+            </div>
+          )
+        ) : variants ? (
+          <>
+            <div>Select Option</div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M9 18L15 12L9 6"
+                stroke="#1D2024"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>{" "}
+          </>
+        ) : (
+          <div
+            style={{
+              textAlign: "center",
+              display: "flex",
+              justifyContent: "center",
+            }}
           >
-            <circle cx="12" cy="12" r="10" fill="black" />
-            <circle cx="12" cy="12" r="11.5" stroke="#1D2024" />
-          </svg>
-          <p>Black</p>
-        </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-        >
-          <path
-            d="M9 18L15 12L9 6"
-            stroke="#1D2024"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
+            <p>Add to Bundle</p>
+          </div>
+        )}
       </div>
     </div>
   );

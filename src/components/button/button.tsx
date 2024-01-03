@@ -1,11 +1,11 @@
 import React from 'react'
-
+import "./styles.css"
 type Props = {}
 
-function button({}: Props) {
+function Button({title}: Props) {
   return (
-    <div>button</div>
+    <div className='button-container'>{title}</div>
   )
 }
 
-export default button
+export default Button
