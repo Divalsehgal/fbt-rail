@@ -1,32 +1,31 @@
-import "./styles.css"
-type Props = {};
+import "./styles.css";
+import strike from "../../assets/strike.svg";
+
 
 function Price(props: any) {
   const {
     wasPrice,
     price,
-    priceText,
-    priceCurrency,
+    priceText = "inc VAT",
+    priceCurrency = "£",
     exVatPrice,
-    exVatPriceText,
+    exVatPriceText = "ex VAT",
+    onClick
   } = props;
   return (
-    <div className="price-container">
+    <div className="price-container" onClick={onClick}>
       <div className="was-price">
         <span>Was</span>
-        {priceCurrency}
-        {wasPrice}
-        <span className="stroke">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="43"
-            height="12"
-            viewBox="0 0 43 12"
-            fill="none"
-          >
-            <path d="M42.5 0.5L1 11.5" stroke="#F58585" />
-          </svg>
+
+        <span className="was-price-inner">
+          <img src={strike} alt="strike" className="strike" />{" "}
+          <span className="was-price">
+            {" "}
+            {priceCurrency}
+            {wasPrice}
+          </span>
         </span>
+        <span className="stroke"></span>
       </div>
       <div className="vat-price">
         {priceCurrency}
@@ -35,7 +34,6 @@ function Price(props: any) {
       </div>
       <div className="exvat-price">
         {priceCurrency}
-
         {exVatPrice}
         {exVatPriceText}
       </div>

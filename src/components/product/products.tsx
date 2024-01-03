@@ -1,13 +1,8 @@
 import Price from "../price/price";
 import "./styles.css";
 import checkbox from "../../assets/checkbox.svg";
-type ProductProps = {
-  src: string;
-  alt: string;
-  description: string;
-};
 
-function Product(props: ProductProps) {
+function Product(props: any) {
   const {
     src,
     alt,
@@ -17,6 +12,7 @@ function Product(props: ProductProps) {
     variants,
     id,
     checkboxHandler,
+    openModal
   } = props;
   const showVariantColor = currentVariant?.color;
   const selectedColor = currentVariant?.colorCode;
@@ -24,7 +20,7 @@ function Product(props: ProductProps) {
   return (
     <div className="product-container">
       {/* image */}
-      <img src={src} alt={alt} />
+      <img src={src} alt={alt} onClick={openModal(id)} />
       {/* checkbox */}
 
       {isChecked ? (
@@ -41,13 +37,15 @@ function Product(props: ProductProps) {
       {/* rating */}
       <Rating />
       {/* Description */}
-      <div className="description">{description}</div>
+      <div className="description" onClick={openModal(id)}>
+        {description}
+      </div>
       {/* Price */}
-      <Price {...props} />
+      <Price {...props} onClick={openModal(id)} />
 
       {/* Variant selector */}
 
-      <div className="variant-selector">
+      <div className="variant-selector" onClick={openModal(id)}>
         {isChecked ? (
           selectedColor ? (
             <>
@@ -132,7 +130,7 @@ function Product(props: ProductProps) {
 
 export default Product;
 
-function Rating() {
+export function Rating() {
   function RatingIcon() {
     return (
       <>
@@ -155,7 +153,7 @@ function Rating() {
   }
   return (
     <div className="rating-container">
-      {[1, 2, 3, 4, 5].map((m, i) => {
+      {[1, 2, 3, 4, 5].map(() => {
         return (
           <>
             <RatingIcon />

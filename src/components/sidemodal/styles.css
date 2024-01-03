@@ -1,0 +1,43 @@
+.side-modal {
+  position: fixed;
+  top: 0;
+  right: -600px;
+  height: 100%;
+  width: 600px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease-in;
+  z-index: 1;
+}
+
+.side-modal.open {
+  right: 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: right 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  display: none;
+  z-index: 0;
+}
+
+.side-modal.open .overlay {
+  display: block;
+  right: 600px;
+}
+
+.modal-content {
+      background: #F0F1F2;
+
+  padding: 24px;
+  height: 292px;
+}
+
+.close-button {
+  margin-bottom: 10px;
+}

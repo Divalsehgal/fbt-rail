@@ -1,5 +1,5 @@
 import "./App.css";
-import Rail from "./rail/rail";
+import Rail from "./components/rail/rail";
 
 function App() {
   return (

@@ -1,11 +1,11 @@
-import React from 'react'
 import "./styles.css"
-type Props = {}
 
-function Button({title}: Props) {
+function Button({ title, toggleModal }: any) {
   return (
-    <div className='button-container'>{title}</div>
-  )
+    <div className="button-container" onClick={toggleModal}>
+      {title}
+    </div>
+  );
 }
 
 export default Button

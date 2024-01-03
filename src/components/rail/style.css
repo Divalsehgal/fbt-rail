@@ -16,7 +16,6 @@
   top: 33%;
   width: 32px;
   margin-left: -15px;
-
 }
 
 .products {
@@ -35,9 +34,31 @@
   flex: 0.4;
 }
 
-
 .calculation {
-  flex:0.2;
-  margin-top:119px;
+  display:flex;
+  gap:8px;
+  flex-direction: column;
+  flex: 0.2;
+  margin-top: 119px;
   margin-left: 70px;
+}
+
+.price-saved {
+  display: flex;
+  width: 114px;
+  height: 22px;
+  padding: 8px;
+  color:#fff;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  background: #d80a00;
+  flex-shrink: 0;
+}
+
+.top{
+  display:flex;
+  gap:36px;
+  flex-direction: column;
 }
